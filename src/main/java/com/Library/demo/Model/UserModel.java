@@ -12,23 +12,29 @@ public class UserModel {
     @Column(name = "userName")
     private String userName;
     @Column(name = "bookIssue1")
-    private String bookIssue1;
+    private String bookIssue1 = "";
     @Column(name = "bookIssueDate1")
-    private Date bookIssueDate1;
+    private String bookIssueDate1 = "";
     @Column(name = "bookIssue2")
-    private String bookIssue2;
+    private String bookIssue2 = "";
     @Column(name = "bookIssueDate2")
-    private Date bookIssueDate2;
+    private String bookIssueDate2 = "";
 
     public UserModel() {
     }
 
-    public UserModel(String userName, String bookIssue1, Date bookIssueDate1, String bookIssue2, Date bookIssueDate2) {
+    public UserModel(String userName, String bookIssue1, String bookIssueDate1, String bookIssue2, String bookIssueDate2) {
         this.userName = userName;
         this.bookIssue1 = bookIssue1;
         this.bookIssueDate1 = bookIssueDate1;
         this.bookIssue2 = bookIssue2;
         this.bookIssueDate2 = bookIssueDate2;
+    }
+
+    public UserModel(String userName, String bookIssue1, String bookIssue2) {
+        this.userName = userName;
+        this.bookIssue1 = bookIssue1;
+        this.bookIssue2 = bookIssue2;
     }
 
     public int getId() {
@@ -51,11 +57,11 @@ public class UserModel {
         this.bookIssue1 = bookIssue1;
     }
 
-    public Date getBookIssueDate1() {
+    public String getBookIssueDate1() {
         return bookIssueDate1;
     }
 
-    public void setBookIssueDate1(Date bookIssueDate1) {
+    public void setBookIssueDate1(String bookIssueDate1) {
         this.bookIssueDate1 = bookIssueDate1;
     }
 
@@ -67,16 +73,16 @@ public class UserModel {
         this.bookIssue2 = bookIssue2;
     }
 
-    public Date getBookIssueDate2() {
+    public String getBookIssueDate2() {
         return bookIssueDate2;
     }
 
-    public void setBookIssueDate2(Date bookIssueDate2) {
+    public void setBookIssueDate2(String bookIssueDate2) {
         this.bookIssueDate2 = bookIssueDate2;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "User [id=" + id + " username= " + userName + "]";
     }
 }

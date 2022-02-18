@@ -15,19 +15,25 @@ public class BookModel {
     @Column(name = "status")
     private boolean status;
     @Column(name = "borrower")
-    private String borrower;
+    private String borrower = "";
     @Column(name = "borrowDate")
-    private Date borrowDate;
+    private String borrowDate = "";
 
     public BookModel() {
     }
 
-    public BookModel(String bookTitle, String publisher, boolean status, String borrower, Date borrowDate) {
+    public BookModel(String bookTitle, String publisher, boolean status, String borrower, String borrowDate) {
         this.bookTitle = bookTitle;
         this.publisher = publisher;
         this.status = status;
         this.borrower = borrower;
         this.borrowDate = borrowDate;
+    }
+
+    public BookModel(String bookTitle, String publisher, boolean status) {
+        this.bookTitle = bookTitle;
+        this.publisher = publisher;
+        this.status = status;
     }
 
     public long getBookID() {
@@ -63,11 +69,11 @@ public class BookModel {
         this.borrower = borrower;
     }
 
-    public Date getBorrowDate() {
+    public String getBorrowDate() {
         return borrowDate;
     }
 
-    public void setBorrowDate(Date borrowDate) {
+    public void setBorrowDate(String borrowDate) {
         this.borrowDate = borrowDate;
     }
 }
