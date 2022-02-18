@@ -2,14 +2,11 @@ package com.Library.demo.Controller;
 
 import com.Library.demo.Model.UserModel;
 import com.Library.demo.Repository.BookRepo;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.Library.demo.Repository.UserRepo;
-
-import javax.xml.transform.OutputKeys;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +19,7 @@ public class UserController {
     @Autowired
     BookRepo bookRepo;
     @GetMapping("/check")
-    public HttpStatus check() {
+    public HttpStatus status() {
         return HttpStatus.OK;
     }
     @GetMapping("/allUsers")
@@ -31,8 +28,6 @@ public class UserController {
             List<UserModel> users = new ArrayList<>();
             if(title == null)
                 userRepo.findAll().forEach(users::add);
-            else
-                userRepo.findByTitleContaining(title).forEach((users::add));
             if(users.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             return new ResponseEntity<>(users, HttpStatus.OK);

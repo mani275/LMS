@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/book")
 public class BookController {
-    @Autowired
-    UserRepo userRepo;
+//    @Autowired
+//    UserRepo userRepo;
+
     @Autowired
     BookRepo bookRepo;
     @GetMapping("/check")
@@ -29,8 +29,8 @@ public class BookController {
             List<BookModel> books = new ArrayList<>();
             if (title == null)
                 bookRepo.findAll().forEach(books::add);
-            else
-                bookRepo.findByTitleContaining(title).forEach(books::add);
+//            else
+//                bookRepo.findBybookTitle(title).forEach(books::add);
             if (books.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             return new ResponseEntity<>(books, HttpStatus.OK);
