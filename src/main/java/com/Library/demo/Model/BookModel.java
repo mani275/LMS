@@ -3,9 +3,11 @@ package com.Library.demo.Model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table
+@Table(name = "books")
+@Entity
 public class BookModel {
     @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bookID;
     @Column(name = "bookTitle")
@@ -75,5 +77,10 @@ public class BookModel {
 
     public void setBorrowDate(String borrowDate) {
         this.borrowDate = borrowDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [id =" + bookID + "bookTitle=" + bookTitle + "]";
     }
 }
