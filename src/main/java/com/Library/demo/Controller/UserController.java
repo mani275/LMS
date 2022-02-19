@@ -22,12 +22,11 @@ public class UserController {
     public HttpStatus status() {
         return HttpStatus.OK;
     }
-    @GetMapping("/allUsers")
+    @GetMapping("/userDetail")
     public ResponseEntity<List<UserModel>> getAllUsers(@RequestParam(required = false) String title){
         try {
-            List<UserModel> users = new ArrayList<>();
-            if(title == null)
-                userRepo.findAll().forEach(users::add);
+            //            if(title == null)
+            List<UserModel> users = new ArrayList<>(userRepo.findAll());
             if(users.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             return new ResponseEntity<>(users, HttpStatus.OK);
@@ -39,12 +38,7 @@ public class UserController {
     @GetMapping("userDetail/{id}")
     public ResponseEntity<UserModel> getUserByID(@PathVariable long id){
         Optional<UserModel> userData = userRepo.findById(id);
-        if(userData.isPresent()) {
-            return new ResponseEntity<>(userData.get(), HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return userData.map(userModel -> new ResponseEntity<>(userModel, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @PostMapping("/newUser")
     public ResponseEntity<UserModel> addUser(@RequestBody UserModel userModel){
@@ -55,6 +49,16 @@ public class UserController {
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/userDetail")
+    public ResponseEntity<HttpStatus> deleteAllUsers(){
+        try{
+            userRepo.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
